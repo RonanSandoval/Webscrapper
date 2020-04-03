@@ -1,11 +1,11 @@
-import urllib2
+import requests
 from bs4 import BeautifulSoup 
 
-page = urllib2.urlopen("https://www.atlas-ling.ca/app")
-soup = BeautifulSoup(page,'html.parser')
+page = requests.get("https://www.atlas-ling.ca/app")
+soup = BeautifulSoup(page.content ,'html.parser')
+print(soup.prettify())
 
-categories = soup.select("div", {"id" : "categoryList"})
-    #{"class:", "list-group-item p-0"})
-#vals = app.find("div", {"class" : "list-group-item"})
-print(categories.contents)
+categories = soup.find(id = "categoryList")
+
+print(categories)
 
