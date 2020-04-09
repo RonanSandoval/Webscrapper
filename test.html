@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ab2eb3f6e4a28a6eb71b0321652428628050290d2858250af8756081a8f7115359c71790e5305e9a72db83f4cdc6e35ca9aae03cea2683e8ebb74df76c8bce2e" name="csrf-token"/>
+  <title>
+   Algonquian Linguistics Atlas
+  </title>
+  <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script-->
+  <link href="/css/bootstrap-reboot.min.css" rel="stylesheet"/>
+  <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="/css/bootstrap-grid.min.css" rel="stylesheet"/>
+  <link href="/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:500i|Roboto:300,400,700|Roboto+Mono" rel="stylesheet"/>
+  <script src="/js/jquery-3.4.1.min.js">
+  </script>
+  <script src="/js/bootstrap.min.js">
+  </script>
+  <script src="/js/all.min.js">
+  </script>
+  <style type="text/css">
+   @font-face {
+            font-family: "BJCree UNI";
+            src: url("./font/bjcrus.eot");
+            src: local("BJCree UNI"), url("./font/bjcrus.ttf") format("truetype");
+        }
+        .syllabics {
+            font-family: 'BJCree UNI' !important;
+
+        }
+        #app {
+            position: fixed;
+            top : 80px;
+            left:0;
+            width: 100vw;
+            height: calc(100vh - 80px) ;
+            overflow: auto;
+            padding-bottom: 3rem;
+        }
+
+        #menu {
+            top: 35px;
+            left: 100px;
+            right: 100px;
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .btn-primary {
+            border: 2px solid #fff;
+            border-radius: .3rem;
+            color: #eee !important;
+        }
+        .btn-primary.active {
+            border-color:white !important;
+            color: #630000 !important;
+            background-color: white !important;
+            border-color:white !important;
+        }
+        .btn.resources {
+            background-color: #2aabd2 !important;
+            color: white !important;
+            border-color:white !important;
+        }
+        .btn.resources:hover {
+            background-color: #6cf !important;
+            color: white !important;
+            border-color:white !important;
+        }
+        .btn.about, .btn.classroom {
+            background-color: #a19b5d !important;
+            color: white !important;
+            border-color:white !important;
+        }
+        .btn.about:hover, .btn.classroom:hover {
+            background-color: #d2cc8e !important;
+            color: white !important;
+            border-color:white !important;
+        }
+        .btn.instructions, .btn.download {
+            background-color: #c5a145 !important;
+            color: white !important;
+            border-color:white !important;
+        }
+        .btn.instructions:hover, .btn.download:hover {
+            background-color: #f6d276 !important;
+            color: white !important;
+            border-color:white !important;
+        }
+        .btn{
+            transition: display 2s linear 1s;
+        }
+        .mydialog {
+            position: fixed;
+            width: 60vw;
+            height: 70vh;
+            top : 180px;
+            left : 20vw;/*
+            bottom : 70px;
+            right : 20vw;*/
+            z-index: -1;
+
+        }
+        .mydialog > .body {
+            overflow: auto;
+            position: absolute;
+
+            bottom: 3px;
+            top: 50px;
+            left:   0;
+            right:  0;
+            padding: 1rem;
+        }
+        .mydialog > .btn {
+            z-index: 1000;
+        }
+
+        .mydialog.show {
+            z-index: 1000 !important;
+        }
+        .syllabics {
+            font-family: 'BJCree UNI', 'Aboriginal Sans', "Courier New" !important;
+            font-size: 120%;
+        }
+        #categoryList > .list-group, #meaningList > .list-group, #phraseList > .list-group{
+            height:calc(100vh - 268px);
+            position: absolute;
+            width: calc(100% - 2.5rem);
+            overflow: auto;
+
+        }
+        #categoryList  .list-group-item :hover, #meaningList  .list-group-item :hover {
+            background-color: #630000;
+            color:#eee;
+        }
+        h3,h2 {
+            font-weight: 100 ;
+        }
+        /*.btn-primary:not(:disabled).active {
+            border-color: #230000 !important;
+        }*/
+        @media (max-width: 576px) {
+            #menu {
+                flex-direction: column;
+                top:2vh;
+
+            }
+        }
+  </style>
+  <script type="text/javascript">
+   $(function(){
+
+
+            $('#credits > .body').load('https://resources.atlas-ling.ca/credits/?notheme=yes');
+            $('#about > .body').load('https://resources.atlas-ling.ca/about/?notheme=yes');
+            $('#classroom > .body').load('https://resources.atlas-ling.ca/classroom/?notheme=yes');
+            //$('#instructions > .body').load('https://resources.atlas-ling.ca/instructions_en/?notheme=yes');
+            $('#downloads > .body').load('https://resources.atlas-ling.ca/downloads/?notheme=yes');
+
+            $( ".draggable" ).draggable();
+        })
+  </script>
+ </head>
+ <body>
+  <img id="loader" src="/img/eclipse.gif" style="z-index: 10000; position: fixed; top:35vh; left:35vw;"/>
+  <div style="background: #630000 url(https://www.atlas-ling.ca/img/banner_middle.jpg) repeat-x center; height: 75px; border-bottom: 5px solid white;">
+   <img class="float-right" src="./img/banner_right.png">
+    <img class="float-left d-none d-sm-block" src="./img/banner_left_en.jpg"/>
+   </img>
+  </div>
+  <div id="app" lang="en">
+  </div>
+  <div class="bg-white text-right" style="position: fixed; top: 70px; right: 15px; left: 0px; ">
+   <a class="btn btn-primary" href="./">
+    Map
+   </a>
+   <a class="btn btn-primary ml-2" href="./feature_map">
+    Dialectal Maps
+   </a>
+   <span class="btn-group">
+    <a class="btn btn-primary active" href="./app?locale=eng">
+     ENG
+    </a>
+    <a class="btn btn-primary" href="./app?locale=fra">
+     FRA
+    </a>
+   </span>
+  </div>
+  <div id="menu">
+   <span class="btn btn-primary mr-2" onclick="$('#menu &gt; .btn').toggleClass('d-none')" style="border-radius: 1rem;">
+    <i class="fa fa-bars mr-2">
+    </i>
+    Menu
+   </span>
+   <span class="btn btn-primary mr-2 d-none" onclick="$('#menu &gt; .btn').toggleClass('d-none')" style="border-radius: 1rem;">
+    <i class="fa fa-times-circle mr-2">
+    </i>
+    Menu
+   </span>
+   <a class="btn btn-lg btn-primary mr-2 d-none resources" href="https://resources.atlas-ling.ca" target="resources">
+    Resources
+   </a>
+   <span class="btn btn-lg btn-primary mr-2 d-none about" onclick="openMyDialog('about')">
+    About the atlas
+   </span>
+   <!--span onclick="openMyDialog('instructions')" class="btn btn-lg btn-primary mr-2 d-none instructions">Instructions</span-->
+   <span class="btn btn-lg btn-primary mr-2 d-none credits" onclick="openMyDialog('credits')">
+    Credits
+   </span>
+   <span class="btn btn-lg btn-primary mr-2 d-none classroom" onclick="openMyDialog('classroom')">
+    Classroom
+   </span>
+   <span class="btn btn-lg btn-primary mr-2 d-none download" onclick="openMyDialog('downloads')">
+    Download
+   </span>
+  </div>
+ </body>
+</html>
+<div class="mydialog border border-light shadow rounded bg-white draggable collapse" id="about">
+ <button class="btn text-danger float-right" onclick="$('#about').removeClass('show')">
+  <span class="fa fa-window-close">
+  </span>
+ </button>
+ <h3 class="border-bottom p-2 pb-0 text-center bg-primary text-white">
+  About
+ </h3>
+ <div class="body">
+ </div>
+</div>
+<div class="mydialog border border-light shadow rounded bg-white draggable collapse" id="instructions">
+ <button class="btn text-danger float-right" onclick="$('#instructions').removeClass('show')">
+  <span class="fa fa-window-close">
+  </span>
+ </button>
+ <h3 class="border-bottom p-2 pb-0 text-center bg-primary text-white">
+  Instructions
+ </h3>
+ <div class="body">
+ </div>
+</div>
+<div class="mydialog border border-light shadow rounded bg-white draggable collapse" id="credits">
+ <button class="btn text-danger float-right" onclick="$('#credits').removeClass('show')">
+  <span class="fa fa-window-close">
+  </span>
+ </button>
+ <h3 class="border-bottom p-2 pb-0 text-center bg-primary text-white">
+  Credits
+ </h3>
+ <div class="body">
+ </div>
+</div>
+<div class="mydialog border border-light shadow rounded bg-white draggable collapse" id="classroom">
+ <button class="btn text-danger float-right" onclick="$('#classroom').removeClass('show')">
+  <span class="fa fa-window-close">
+  </span>
+ </button>
+ <h3 class="border-bottom p-2 pb-0 text-center bg-primary text-white">
+  Classroom
+ </h3>
+ <div class="body">
+ </div>
+</div>
+<div class="mydialog border border-light shadow rounded bg-white draggable collapse" id="downloads">
+ <button class="btn text-danger float-right" onclick="$('#downloads').removeClass('show')">
+  <span class="fa fa-window-close">
+  </span>
+ </button>
+ <h3 class="border-bottom p-2 pb-0 text-center bg-primary text-white">
+  Downloads
+ </h3>
+ <div class="body">
+ </div>
+</div>
+<script type="text/javascript">
+ function openMyDialog(dialogID) {
+        $("#"+dialogID).toggleClass('show');
+    }
+    function playAudio(url,callback){
+        document.getElementById("audio").innerHTML="<source type='audio/mpeg' src=\""+url+"\"/>";
+
+        document.getElementById("audio").load();
+        document.getElementById("audio").play();
+        if(callback &&  callback.instanceOf('function')){
+            document.getElementById("audio").onended= callback;
+        }
+    }
+    function playAudioSlow(url,callback){
+        if(callback ){
+            document.getElementById("audioSlow").onended= callback;
+        }
+        document.getElementById("audioSlow").defaultPlaybackRate = 0.65;
+        document.getElementById("audioSlow").playbackRate = 0.65;
+        document.getElementById("audioSlow").innerHTML="<source type='audio/mpeg' src=\""+url+"\"/>";
+        //console.log(document.getElementById("audio"));
+        document.getElementById("audioSlow").load();
+        document.getElementById("audioSlow").play();
+
+    }
+    //console.log(document.getElementById('app').dataset)
+</script>
+<audio id="audio">
+</audio>
+<audio defaultplaybackrate="0.65" id="audioSlow" playbackrate="0.65">
+</audio>
+<script src="/js/react-js/app.js">
+</script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js">
+</script>
+<!-- Matomo -->
+<script type="text/javascript">
+ var _paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="https://webstats.atlas-ling.ca/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '9']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+<!-- End Matomo Code -->
+<!-- Matomo Image Tracker-->
+<img alt="" src="https://webstats.atlas-ling.ca/matomo.php?idsite=9&amp;rec=1" style="border:0"/>
+<!-- End Matomo -->
+
+None
